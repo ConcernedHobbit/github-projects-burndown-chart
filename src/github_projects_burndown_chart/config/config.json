@@ -1,0 +1,19 @@
+{
+  "repository": {
+    "Lukuvinkkikirjasto": {
+      "query_variables": {
+        "repo_owner": "ConcernedHobbit",
+        "repo_name": "lukuvinkkikirjasto",
+        "project_number": 2,
+        "column_count": 10,
+        "max_cards_per_column_count": 50,
+        "labels_per_issue_count": 5
+      },
+      "settings": {
+        "sprint_start_date": "2022-03-29",
+        "sprint_end_date": "2022-04-05",
+        "points_label": "Points: "
+      }
+    }
+  }
+}
