@@ -21,7 +21,6 @@ __logger.addHandler(__ch)
 def get_repository_project() -> dict:
     query_variables = config['query_variables']
     query_response = gh_api_query(RepositoryProject, query_variables)
-    raise Exception(query_response) # v v scuffed
     project_data = query_response['data']['repository']['project']
     return Project(project_data)
 
