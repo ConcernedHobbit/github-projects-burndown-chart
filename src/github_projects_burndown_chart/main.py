@@ -1,4 +1,5 @@
 import argparse
+from datetime import date
 
 from chart.burndown import *
 from config import config
@@ -60,10 +61,19 @@ if __name__ == '__main__':
                          config.utc_chart_end() or config.utc_sprint_end())
     # Generate the burndown chart
     burndown_chart = BurndownChart(prepare_chart_data(stats))
-    if args.discord:
-        chart_path = "./tmp/chart.png"
-        burndown_chart.generate_chart(chart_path)
-        webhook.post_burndown_chart(chart_path)
-    else:
-        burndown_chart.render()
+
+    # Save burndown chart
+    today = date.today() # Naively assumes str representation is always yyyy-mm-dd
+    chart_path = f"./charts/{args.project_name}-{today}.png"
+    latest_path = f"./charts/{args.project_name}-latest.png"
+    # TODO: refactor to seperate generation and saving
+    burndown_chart.generate_chart(chart_path)
+    burndown_chart.generate_chart(latest_path)
+
+    # if args.discord:
+        # chart_path = "./tmp/chart.png"
+        # burndown_chart.generate_chart(chart_path)
+        # webhook.post_burndown_chart(chart_path)
+    # else:
+        # burndown_chart.render()
     print('Done')
