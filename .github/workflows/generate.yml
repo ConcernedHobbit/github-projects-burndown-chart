@@ -1,0 +1,25 @@
+name: Generate
+on:
+  workflow_dispatch:
+jobs:
+    resources:
+        name: Update resources
+        runs-on: ubuntu-latest
+        steps:
+          - uses: actions/checkout@v3
+          - uses: actions/setup-python@v3
+            with:
+              python-version: '3.9'
+              cache: 'pip'
+
+          - run: pip install -r requirements.txt
+
+          - name: Run burndown chart generator
+            run: make run type=repository name=lukuvinkkikirjasto
+
+          - name: Update resources
+            uses: test-room-7/action-update-file@v1
+            with:
+                file-path: src/github_projects_burndown_chart/*.png
+                commit-msg: Update charts
+                github-token: ${{ secrets.GITHUB_TOKEN }}
