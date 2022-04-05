@@ -2,7 +2,7 @@ import argparse
 from datetime import date
 
 from chart.burndown import *
-from config import config
+from config import secrets, config
 from discord import webhook
 from gh.api_wrapper import get_organization_project, get_repository_project
 from gh.project import Project
@@ -20,6 +20,8 @@ def parse_cli_args():
                         help="The name of the project as it appears in the config.json")
     parser.add_argument("--discord", action='store_true',
                         help="If present, posts the burndown chart to the configured webhook")
+    parser.add_argument("--github_token", action='store_true',
+                        help="If present, overrides or provides the GitHub token")
     return parser.parse_args()
 
 
@@ -56,6 +58,8 @@ def prepare_chart_data(stats: ProjectStats):
 if __name__ == '__main__':
     args = parse_cli_args()
     config.set_project(args.project_type, args.project_name)
+    if args.github_token:
+        secrets.set_github(args.github_token)
     project = download_project_data(args)
     stats = ProjectStats(project, config.utc_sprint_start(),
                          config.utc_chart_end() or config.utc_sprint_end())

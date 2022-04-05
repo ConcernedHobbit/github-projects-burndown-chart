@@ -69,13 +69,28 @@ config = Config(__config)
 ###############################################################################
 # Load secrets.json
 ###############################################################################
+__secrets = {}
 try:
     with open(os.path.join(__location__, 'secrets.json')) as secrets_json:
-        secrets = json.load(secrets_json)
+        __secrets = json.load(secrets_json)
 except FileNotFoundError as err:
-    __logger.critical(err)
-    __logger.critical('Please create a secrets.json file in the config '
-                      'directory; this tool cannot generate a burndown chart without it.')
-    __logger.critical('See the project README.md and config/secrets.json.dist '
-                      'for details.')
-    exit(1)
+    __logger.info('secrets.json not found, you have to provide CLI arguments')
+
+class Secrets:
+
+    def __init__(self, raw_secrets: dict):
+        self.raw_secrets = raw_secrets
+    
+    def set_github(self, token: str) -> None:
+        self.raw_secrets['github_token'] = token
+    
+    def set_dicsord(self, webhook: str) -> None:
+        self.raw_secrets['discord_webhook'] = webhook
+    
+    def github(self) -> str:
+        return self.raw_secrets['github_token']
+    
+    def discord(self) -> str:
+        return self.raw_secrets['discord_webhook']
+
+secrets = Secrets(__secrets)
