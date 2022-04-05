@@ -26,6 +26,6 @@ jobs:
           - name: Update resources
             uses: test-room-7/action-update-file@v1
             with:
-                file-path: src/github_projects_burndown_chart/*.png
+                file-path: src/github_projects_burndown_chart/charts/*.png
                 commit-msg: Update charts
                 github-token: ${{ secrets.GITHUB_TOKEN }}
