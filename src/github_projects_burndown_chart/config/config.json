@@ -1,6 +1,6 @@
 {
   "repository": {
-    "Lukuvinkkikirjasto": {
+    "lukuvinkkikirjasto": {
       "query_variables": {
         "repo_owner": "ConcernedHobbit",
         "repo_name": "lukuvinkkikirjasto",
