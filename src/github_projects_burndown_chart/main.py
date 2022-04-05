@@ -20,7 +20,7 @@ def parse_cli_args():
                         help="The name of the project as it appears in the config.json")
     parser.add_argument("--discord", action='store_true',
                         help="If present, posts the burndown chart to the configured webhook")
-    parser.add_argument("--github_token", action='store_true',
+    parser.add_argument("--github_token",
                         help="If present, overrides or provides the GitHub token")
     return parser.parse_args()
 
