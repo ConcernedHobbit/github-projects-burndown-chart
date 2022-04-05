@@ -19,7 +19,9 @@ jobs:
           - run: pip install -r requirements.txt
 
           - name: Run burndown chart generator
-            run: make run type=repository name=lukuvinkkikirjasto
+            env: 
+              GITHUB_TOKEN: ${{ secrets.REPO_TOKEN }}
+            run: make run type=repository name=lukuvinkkikirjasto github_token="$GITHUB_TOKEN"
 
           - name: Update resources
             uses: test-room-7/action-update-file@v1
