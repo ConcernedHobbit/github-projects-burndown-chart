@@ -45,8 +45,8 @@ def prepare_payload(query, variables):
 
 
 def __get_from_api(query, variables):
-    headers = {'Authorization': 'bearer %s' % secrets['github_token']} \
-        if 'github_token' in secrets else {}
+    headers = {'Authorization': 'bearer %s' % secrets.github()} \
+        if 'github_token' in secrets.raw_secrets else {}
 
     response = requests.post(
         'https://api.github.com/graphql',
