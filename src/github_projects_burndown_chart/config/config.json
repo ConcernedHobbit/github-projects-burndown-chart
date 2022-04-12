@@ -25,8 +25,8 @@
         "labels_per_issue_count": 5
       },
       "settings": {
-        "sprint_start_date": "2022-03-29",
-        "sprint_end_date": "2022-04-05",
+        "sprint_start_date": "2022-04-05",
+        "sprint_end_date": "2022-04-12",
         "points_label": "Points: "
       }
     }
